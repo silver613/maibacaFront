@@ -2,13 +2,13 @@ import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import axios from "axios";
 
-// axios.defaults.baseURL = 'https://localhost:8000';
+axios.defaults.baseURL = 'http://localhost:8000';
 
 
 // const request = axios.create({
 //     baseURL: 'https://localhost:8000',
 // });
-
+let b_url = 'http://localhost:8000/uploads/';
 
 function Newest() {
     
@@ -31,16 +31,27 @@ function Newest() {
     const [selfurl, setSelfUrl] = useState(
         "#"  
     );
+    const [cid, setCid] = useState();
 
     useEffect(async()=>{
-        await axios.get("https://localhost:8000/api/test").then((res)=>{
-            console.log(res);
-            // console.log(res.data.content);
-            // setTitle(res.data.title);
-            // setCoverImg("http://localhost:8000/uploads/comma.jpg");
-            // console.log(coverImg);
+        await axios.get("/api/latest").then((res)=>{
+            setTitle(res.data.title);
+            setCoverImg(b_url+res.data.cover_img);
+            console.log(res.data.category)
+            axios.post("api/get_cat_name",{ id : res.data.category }).then((result)=>{
+                let cat_name = result.data.charAt(0).toUpperCase() + result.data.slice(1);
+                setCategory(cat_name);
+                
+            });
+            const d = new Date(res.data.created_at);
+            const ye = new Intl.DateTimeFormat('en', { year: 'numeric' }).format(d)
+            const mo = new Intl.DateTimeFormat('en', { month: 'long' }).format(d)
+            const da = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(d)
+            setDate(mo+" "+da+", "+ye);
+            setContent(res.data.content);
+            console.log(content);
         })
-    },[])
+    });
     
     return (
         <div className="container">
@@ -56,9 +67,7 @@ function Newest() {
                 <h5 className="pt-3 coffee ml-auto">{category}</h5>
                 <p className="pt-3 ml-2">{date}</p>
             </div>
-            <div className="row">
-                <p className="newest-content">{content}</p>
-            </div>
+            <div className="row" dangerouslySetInnerHTML={{__html: content}} className="box-1"></div>
             <div className="row">
                 <button className="btn bg-coffee milk my-hover">Read More</button>
             </div>
