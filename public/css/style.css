@@ -1,0 +1,69 @@
+html, body {
+    background-color: #FCFFF1;
+}
+.newest-cover {
+    width: 100%;
+    height: auto;   
+}
+.coffee {
+    color: #4E321F;
+}
+.bg-coffee {
+    background-color:  rgba(78, 50, 31, 0.65);
+}
+.my-hover:hover {
+    background-color: #FCFFF1;
+    color: #4E321F;
+    border: 1px solid #4E321F;
+}
+.milk {
+    color: #FCFFF1;
+}
+.newest-content {
+    text-align: justify;
+    font-size: 1.2rem;
+}
+.line {
+    width: 100%;
+    height: 2px;
+    margin: 15px 0px;
+}
+.list-box {
+    display: flex;
+    width: 100%;
+    height: 15vh;
+}
+.item-cover {
+    width: 25%;
+    height: 100%;
+    object-fit: cover;
+}
+.item-category {
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+.itme-vote {
+    color: #F16363;
+    font-size: 13px;
+}
+.item-voteNum {
+    font-size: 14px;
+}
+.item-date {
+    font-size: 14px;
+}
+.item-title {
+    font-size: 1rem;
+    font-weight: bolder;
+    margin-top: -18px;
+}
+.item-content {
+    margin-top: -15px;
+}
+.my-footer {
+    height: 50px;
+    background-color: #4E321F;
+}
+.search-box {
+    
+}
