@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 function Listitem(props) {
-    let url = "/detail/"+props.id;
+    let url = "/detail/" + props.id;
     return (
         <div className="list-box">
             <div className="row">
@@ -18,15 +18,15 @@ function Listitem(props) {
                             <i className="fa fa-heart itme-vote m-1"></i>
                             <p className="item-voteNum">{props.vote}</p>
                         </div>
-                        <Link to = {url}><p className="item-title">{props.title}</p></Link>
-                        
-                        <div className="item-content" dangerouslySetInnerHTML={{__html: props.content}}></div>
+                        <Link to={url}>
+                            <p className="item-title">{props.title}</p>
+                        </Link>
+
+                        <div className="item-content" dangerouslySetInnerHTML={{ __html: props.content }}></div>
                     </div>
                 </div>
             </div>
-            
-           
         </div>
-    )
+    );
 }
 export default Listitem;

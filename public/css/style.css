@@ -1,23 +1,24 @@
-html, body {
-    background-color: #FCFFF1;
+html,
+body {
+    background-color: #fcfff1;
 }
 .newest-cover {
     width: 100%;
-    height: auto;   
+    height: auto;
 }
 .coffee {
-    color: #4E321F;
+    color: #4e321f;
 }
 .bg-coffee {
-    background-color:  rgba(78, 50, 31, 0.65);
+    background-color: rgba(78, 50, 31, 0.65);
 }
 .my-hover:hover {
-    background-color: #FCFFF1;
-    color: #4E321F;
-    border: 1px solid #4E321F;
+    background-color: #fcfff1;
+    color: #4e321f;
+    border: 1px solid #4e321f;
 }
 .milk {
-    color: #FCFFF1;
+    color: #fcfff1;
 }
 .newest-content {
     text-align: justify;
@@ -32,7 +33,6 @@ html, body {
     display: flex;
     width: 100%;
     height: auto;
-
 }
 .item-cover {
     width: 100%;
@@ -45,7 +45,7 @@ html, body {
     font-weight: bold;
 }
 .itme-vote {
-    color: #F16363;
+    color: #f16363;
     font-size: 13px;
 }
 .item-voteNum {
@@ -67,7 +67,7 @@ html, body {
 }
 .my-footer {
     height: 50px;
-    background-color: #4E321F;
+    background-color: #4e321f;
 }
 .box-1 p:not(:nth-child(1), :nth-child(2)) {
     display: none;
@@ -80,14 +80,14 @@ div ul:not(:first-child) {
     margin: 0px !important;
 }
 
-.active{
+.active {
     background-color: blue;
 }
-.unactive{
+.unactive {
     background-color: yellow;
 }
 
-  /****** DETAIL  VIEW ******/
+/****** DETAIL  VIEW ******/
 .detail-cover-img {
     width: 100%;
 }
@@ -106,4 +106,76 @@ div ul:not(:first-child) {
     width: 100% !important;
     margin-top: 20px;
     margin-bottom: 20px;
+}
+
+/* Position and sizing of burger button */
+.bm-burger-button {
+    position: fixed;
+    width: 36px;
+    height: 30px;
+    right: 36px;
+    top: 23px;
+}
+
+/* Color/shape of burger icon bars */
+.bm-burger-bars {
+    background: #373a47;
+}
+
+/* Color/shape of burger icon bars on hover*/
+.bm-burger-bars-hover {
+    background: #a90000;
+}
+
+/* Position and sizing of clickable cross button */
+.bm-cross-button {
+    height: 24px;
+    width: 24px;
+}
+
+/* Color/shape of close button cross */
+.bm-cross {
+    background: #bdc3c7;
+}
+
+/*
+  Sidebar wrapper styles
+  Note: Beware of modifying this element as it can break the animations - you should not need to touch it in most cases
+  */
+.bm-menu-wrap {
+    position: fixed;
+    height: 100%;
+    right: -300px !important;
+    top: 0px !important;
+}
+
+/* General sidebar styles */
+.bm-menu {
+    background: #373a47;
+    padding: 2.5em 1.5em 0;
+    font-size: 1.15em;
+}
+
+/* Morph shape necessary with bubble or elastic */
+.bm-morph-shape {
+    fill: #373a47;
+}
+
+/* Wrapper for item list */
+.bm-item-list {
+    color: #b8b7ad;
+    padding: 0.8em;
+}
+
+/* Individual item */
+.bm-item {
+    display: inline-block;
+}
+
+/* Styling of overlay */
+.bm-overlay {
+    background: rgba(0, 0, 0, 0.3);
+    position: fixed;
+    display: none;
+    z-index: -1;
 }

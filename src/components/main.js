@@ -5,6 +5,7 @@ import Listitem from "./listitem";
 import Newest from "./newest";
 import Sidebar from "./sidebar";
 import axios from "axios";
+import ReactPaginate from 'react-paginate';
 
 axios.defaults.baseURL = 'http://localhost:8000';
 function Main() {
@@ -17,7 +18,7 @@ function Main() {
         await
         getPage(page);
     }, []);
-    const getPage= async (page)=>{
+    const getPage= async(page)=>{
         await axios.post("/api/page",
         {
             page: page
@@ -29,13 +30,6 @@ function Main() {
         })
     }
 
-    // const getCatList= async ()=>{
-    //     await axios.post("/api/get_cat_list").then((res)=>{
-    //         console.log(res.data);
-    //         return res.data;
-    //     })
-    // }
-    
     const pageget = (p)=>{
         console.log(p, "page get")
     }
@@ -47,7 +41,23 @@ function Main() {
         setBtn(data)
         console.log(data)
     }
+    const handlePageClick = (data)=>{
+        getPage(data.selected)
+    }
 
+    const search = async(pageNum, keyWord)=>{
+        setPage(pageNum)
+        await axios.post("/api/search",
+        {
+            page: pageNum,
+            keyword: keyWord
+        }
+        ).then((res)=>{
+            setBlogs(res.data[0])
+            setTotalNum(res.data[1])
+            pagenation(res.data[1])
+        })
+    }
     //main return
     return (
         <div className="container">
@@ -77,20 +87,26 @@ function Main() {
                         })
                     }
                     <div>
-                        {
-                            btn.map((i, index)=>{
-                                return <button className={i == page?"active":"unactive"} onClick = {()=>{
-                                    setPage(i);
-                                    getPage(i)}}>
-                                    {i+1}
-                                </button>
-                            })
-                        }
+                        <ReactPaginate
+                            previousLabel={'previous'}
+                            nextLabel={'next'}
+                            breakLabel={'...'}
+                            breakClassName={'break-me'}
+                            pageCount={Math.ceil(totalNum/10)}
+                            marginPagesDisplayed={2}
+                            pageRangeDisplayed={5}
+                            onPageChange={(c)=>handlePageClick(c)}
+                            containerClassName={'pagination'}
+                            subContainerClassName={'pages pagination'}
+                            activeClassName={'active'}
+                        />
                     </div>
                 </div>
                 
                 <div className="col-sm-4">
-                    <Sidebar />
+                    <Sidebar 
+                        seachFunc = {search}
+                    />
                 </div>
             </div>
         </div>
