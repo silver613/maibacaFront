@@ -29,7 +29,7 @@ function Newest() {
         "Anak muda yang luar biasa.. ” Tak ada duit nk mkn burger time pkp ni, jangan malu jangan segan mari kedai saya Burger Boy. Makan la sampai kenyang. Anda adalah saham akhirat saya.. Sy ikhlas…"  
     );
     const [selfurl, setSelfUrl] = useState(
-        "#"  
+        undefined 
     );
     const [cid, setCid] = useState();
 
@@ -37,11 +37,9 @@ function Newest() {
         await axios.get("/api/latest").then((res)=>{
             setTitle(res.data.title);
             setCoverImg(b_url+res.data.cover_img);
-            console.log(res.data.category)
             axios.post("api/get_cat_name",{ id : res.data.category }).then((result)=>{
                 let cat_name = result.data.charAt(0).toUpperCase() + result.data.slice(1);
-                setCategory(cat_name);
-                
+                setCategory(cat_name);    
             });
             const d = new Date(res.data.created_at);
             const ye = new Intl.DateTimeFormat('en', { year: 'numeric' }).format(d)
@@ -49,7 +47,7 @@ function Newest() {
             const da = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(d)
             setDate(mo+" "+da+", "+ye);
             setContent(res.data.content);
-            console.log(content);
+            setSelfUrl("/detail/"+res.data.id);
         })
     });
     
@@ -67,11 +65,11 @@ function Newest() {
                 <h5 className="pt-3 coffee ml-auto">{category}</h5>
                 <p className="pt-3 ml-2">{date}</p>
             </div>
-            <div className="row" dangerouslySetInnerHTML={{__html: content}} className="box-1"></div>
+            <div className="row box-1" dangerouslySetInnerHTML={{__html: content}}></div>
             <div className="row">
                 <button className="btn bg-coffee milk my-hover">Read More</button>
             </div>
         </div>
     );
 }
-export default Newest;
+export default Newest; 
