@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import Listitem from "./listitem";
 import Newest from "./newest";
 import Sidebar from "./sidebar";
+import Loading from "./loading";
 import axios from "axios";
 import ReactPaginate from 'react-paginate';
 
@@ -13,12 +14,14 @@ function Main() {
     const [blogs, setBlogs] = useState([]);
     const [totalNum, setTotalNum] = useState(0);
     const [btn, setBtn] = useState([]);
-
+    const [keyword, setKeyword] = useState("");
+    const [loading, setLoading] = useState(true);
     useEffect(async()=>{
         await
         getPage(page);
     }, []);
     const getPage= async(page)=>{
+        setLoading(true)
         await axios.post("/api/page",
         {
             page: page
@@ -28,6 +31,7 @@ function Main() {
             setTotalNum(res.data[1])
             pagenation(res.data[1])
         })
+        setLoading(false)
     }
 
     const pageget = (p)=>{
@@ -39,14 +43,23 @@ function Main() {
             data.push(i)
         }
         setBtn(data)
-        console.log(data)
     }
     const handlePageClick = (data)=>{
-        getPage(data.selected)
+        if(keyword){
+            search(page, keyword)
+        } else {
+            getPage(data.selected)
+        }
     }
 
     const search = async(pageNum, keyWord)=>{
         setPage(pageNum)
+        setKeyword(keyWord)
+        if(!keyWord){
+            getPage(page)
+            return false
+        }
+        setLoading(true)
         await axios.post("/api/search",
         {
             page: pageNum,
@@ -57,11 +70,16 @@ function Main() {
             setTotalNum(res.data[1])
             pagenation(res.data[1])
         })
+        setLoading(false)
     }
     //main return
     return (
         <div className="container">
+            <Loading
+                loading={loading}
+            />
             <div className="row">
+                
                 <div className="col-sm-8">
                     <Newest />
                     {
@@ -88,10 +106,14 @@ function Main() {
                     }
                     <div>
                         <ReactPaginate
-                            previousLabel={'previous'}
-                            nextLabel={'next'}
+                            previousLabel={'<'}
+                            nextLabel={'>'}
                             breakLabel={'...'}
                             breakClassName={'break-me'}
+                            previousLinkClassName={'prev-btn'}
+                            nextLinkClassName={'next-btn'}
+                            pageLinkClassName={'page-btn'}
+                            activeLinkClassName={'active-btn'}
                             pageCount={Math.ceil(totalNum/10)}
                             marginPagesDisplayed={2}
                             pageRangeDisplayed={5}
@@ -106,6 +128,7 @@ function Main() {
                 <div className="col-sm-4">
                     <Sidebar 
                         seachFunc = {search}
+                        blackKey = {setKeyword}
                     />
                 </div>
             </div>

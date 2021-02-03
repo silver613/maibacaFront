@@ -15,7 +15,7 @@ function Listitem(props) {
                         <div className="row">
                             <p className="item-category ml-2 mr-auto">{props.category}</p>
                             <p className="item-date mr-4">{props.date}</p>
-                            <i className="fa fa-heart itme-vote m-1"></i>
+                            <i className="fa fa-heart item-vote m-1"></i>
                             <p className="item-voteNum">{props.vote}</p>
                         </div>
                         <Link to={url}>

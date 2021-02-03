@@ -9,7 +9,7 @@ function Header() {
             <div className="container d-flex align-items-center">
                 {/* <h1 className="logo mr-auto"><a href="index.html">Bikin</a></h1> */}
                 <div className="logo mr-auto">
-                    <img src="img/logo.png"/>
+                    <img src="/img/logo.png"/>
                 </div>
                 <div className = "mMenu">
                     <Menu
@@ -24,10 +24,10 @@ function Header() {
                 </div>
                 <nav className="nav-menu d-none d-lg-block">
                     <ul>
-                        <li><Link to = "/category_1">Category_1</Link></li>
-                        <li><Link to = "/category_2">Category_2</Link></li>
-                        <li><Link to = "/category_3">Category_3</Link></li>
-                        <li><Link to = "/category_4">Category_4</Link></li>
+                        <li><Link to = "/">Home</Link></li>
+                        <li><Link to = "/hot">Hot Articles</Link></li>
+                        <li><Link to = "/term">Terms</Link></li>
+                        <li><Link to = "/contact">Contact Us</Link></li>
                     </ul>
                 </nav>
             </div>
