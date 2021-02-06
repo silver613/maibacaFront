@@ -260,7 +260,9 @@ div ul:not(:first-child) {
     margin: 10px;
 } */
 .pagination {
-    margin-top: 2rem;
+    position: absolute;
+    bottom: 20px;
+    left: 50px;
 }
 .prev-btn, .next-btn {
     background-color: #4e321f;
@@ -345,4 +347,28 @@ div ul:not(:first-child) {
 }
 .like-this:hover {
     text-decoration: underline;
+}
+.hide {
+    display: none;
+}
+.sub-btn {
+    float: right;
+    width: 80px;
+}
+
+.prev-next {
+    width: 80px;
+    margin: 10px;
+}
+.terms-title {
+    width: 100%;
+}
+.terms-content {
+    width: 100%;
+}
+.box-5 {
+    margin-bottom: 100px;
+}
+#react-burger-menu-btn{
+    color : white;
 }

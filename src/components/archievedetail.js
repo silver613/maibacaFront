@@ -1,25 +1,20 @@
-import React, { useState, useEffect } from "react";
-
-// import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import Listitem from "./listitem";
-import Newest from "./newest";
+import axios from 'axios';
+import {React, useEffect, useState} from 'react';
+import Listitem from './listitem';
 import Sidebar from "./sidebar";
 import Loading from "./loading";
-import axios from "axios";
 import ReactPaginate from 'react-paginate';
 
-axios.defaults.baseURL = 'http://localhost:8000';
-function Main() {
-    const [page, setPage] = useState(0);
+const ArchieveDetail = (props) => {
+    const year = props.match.params.year;
+    const month = props.match.params.month;
     const [blogs, setBlogs] = useState([]);
+    const [page, setPage] = useState(0);
     const [totalNum, setTotalNum] = useState(0);
     const [btn, setBtn] = useState([]);
     const [keyword, setKeyword] = useState("");
     const [loading, setLoading] = useState(true);
-    useEffect(async()=>{
-        await
-        getPage(page);
-    }, []);
+
     const getPage= async(page)=>{
         setLoading(true)
         await axios.post("/api/page",
@@ -34,9 +29,6 @@ function Main() {
         setLoading(false)
     }
 
-    const pageget = (p)=>{
-        console.log(p, "page get")
-    }
     const pagenation= (t)=>{
         var data = []
         for(var i=0; i< (Math.ceil(t/10)); i++){
@@ -72,8 +64,21 @@ function Main() {
         })
         setLoading(false)
     }
-    //main return
-    return (
+
+    const getArchieveList = async() => {
+        await axios.post("/api/archievelist",{
+            year  : year,
+            month : month
+        }).then((res)=>{
+            setBlogs(res.data);
+        })
+    }
+    useEffect(()=>{
+        getArchieveList();
+        setLoading(false);
+    },[year, month])
+
+    return(
         <div className="container">
             <Loading
                 loading={loading}
@@ -81,8 +86,6 @@ function Main() {
             <div className="row">
                 
                 <div className="col-sm-8">
-                    <Newest />
-                    <div className="box-5">
                     {
                         blogs.map((blog, index)=>{
                             let cat_name = blog.cat_name.charAt(0).toUpperCase() + blog.cat_name.slice(1); // to uppercase
@@ -105,8 +108,6 @@ function Main() {
                             ]
                         })
                     }
-                    </div>
-                    
                     <div>
                         <ReactPaginate
                             previousLabel={'<'}
@@ -137,5 +138,7 @@ function Main() {
             </div>
         </div>
     )
+
 }
-export default Main;
+
+export default ArchieveDetail;

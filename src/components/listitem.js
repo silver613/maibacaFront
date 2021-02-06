@@ -8,7 +8,7 @@ function Listitem(props) {
         <div className="list-box">
             <div className="row">
                 <div className="col-md-4">
-                    <img className="item-cover" src={props.img} />
+                    {props.img=="http://localhost:8000/uploads/"?<img className="item-cover" src="/img/banner-1.png" />:<img className="item-cover" src={props.img} />}
                 </div>
                 <div className="col-md-8">
                     <div className="container">

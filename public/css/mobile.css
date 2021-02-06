@@ -2,6 +2,9 @@
     .item-content {
         display: none;
     }
+    .detail-title {
+        font-size: 25px;
+    }
 }
 
 @media (min-width: 1200px) {

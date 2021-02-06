@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import Archieve from './archieve';
 import Recent from './recent';
 
 function Sidebar(props) {
@@ -13,9 +14,8 @@ function Sidebar(props) {
     }
     return(
         <div>
-            <div className="search-box mt-5">
-                {/* <button className="search-btn btn">Search</button> */}
-                <label className="search-label" for="search-box">
+            <div className={props.isDetail?"hide":"search-box mt-5"}>
+                <label className="search-label" htmlFor="search-box">
                     Search</label>
                 <input className="search-form" id="search-box" onChange={(e)=>{setKeyWord(e.target.value)}} onKeyDown={(e)=>keyHandle(e)}></input>    
             </div>
@@ -32,7 +32,7 @@ function Sidebar(props) {
             </p>
             <h4 className="side-title">ARCHIEVE</h4>
             <div className="line bg-coffee side-line"></div>
-            
+            <Archieve />
         </div>
     )
 }

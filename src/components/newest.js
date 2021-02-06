@@ -18,8 +18,7 @@ function Newest() {
     useEffect(async () => {
         await axios.get("/api/latest").then((res) => {
             setTitle(res.data.title);
-            
-            setCoverImg(b_url + res?.data?.cover_img);
+            if(res.data.cover_img) {setCoverImg(b_url + res.data.cover_img);}
             axios.post("api/get_cat_name", { id: res.data.category }).then((result) => {
                 let cat_name = result.data.charAt(0).toUpperCase() + result.data.slice(1);
                 setCategory(cat_name);
@@ -41,7 +40,7 @@ function Newest() {
                 <h1 className="coffee">Newest Article</h1>
             </div>
             <div className="row">
-                <img src={coverImg} className="newest-cover" />
+                {coverImg==""?<img src="/img/banner-1.png" className="newest-cover" />:<img src={coverImg} className="newest-cover" />}
             </div>
             <div className="row">
                 <Link to={selfurl}>

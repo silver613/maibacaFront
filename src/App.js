@@ -11,6 +11,7 @@ import Term from "./components/term";
 
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import Detail from "./components/detail";
+import ArchieveDetail from "./components/archievedetail";
 function App() {
     return (
         <Router>
@@ -18,6 +19,7 @@ function App() {
             <Route exact path="/" component={Main} />
             <Route path="/category_1" component={Category_1} />
             <Route path="/detail/:id" component={Detail} />
+            <Route path="/archieve/:year/:month" component={ArchieveDetail} />
             <Route path="/hot" component={Hot} />
             <Route path="/term" component={Term} />
             <Route path="/contact" component={Contact} />
